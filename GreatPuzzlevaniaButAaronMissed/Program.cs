@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GreatPuzzlevaniaDuel
+namespace GreatPuzzlevaniaButAaronMissed
 {
     class Program
     {
@@ -18,11 +18,15 @@ namespace GreatPuzzlevaniaDuel
             int trials = 10000;
             int s = 0;
 
-            while(trials > 0)
+            bool a_missed;
+
+            while (trials > 0)
             {
                 duelees[0] = new Duelist("Aaron", 33.33);
                 duelees[1] = new Duelist("Bob", 50);
                 duelees[2] = new Duelist("Charlie", 99.5);
+
+                a_missed = false;
 
                 while (true)
                 {
@@ -38,7 +42,10 @@ namespace GreatPuzzlevaniaDuel
                         }
                         if (threat > -1)
                         {
-                            duelees[s].ShootAtDuelist(duelees[threat]);
+                            if (s != 0 || (s == 0 && a_missed))
+                                duelees[s].ShootAtDuelist(duelees[threat]);
+                            else
+                                a_missed = true;
                         }
                         else
                         {
